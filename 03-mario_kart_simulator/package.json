@@ -1,0 +1,15 @@
+{
+  "name": "03-mario_kart_simulator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Gabriel Soares",
+  "license": "ISC",
+  "dependencies": {
+    "03-mario_kart_simulator": "file:"
+  }
+}
