@@ -35,8 +35,6 @@ async function getRandomBlock() {
 }
 
 async function playRaceEngine(character1, character2) {
-    let pointsPlayer1 = 0;
-    let pointsPlayer2 = 0;
     
     for (let round = 1; round <= 5; round++) {
         await delay(500);
@@ -62,16 +60,16 @@ async function playRaceEngine(character1, character2) {
             console.log(`${character2.VELOCIDADE} + ${diceResult2} = ${testSkill2}\n`)
 
             if (testSkill1 > testSkill2){
-                pointsPlayer1++;
+                character1.PONTOS++;
                 console.log(`Ponto para ${character1.NOME}!\n`)
-                console.log(`Placar: \n${character1.NOME}: ${pointsPlayer1}\n${character2.NOME}: ${pointsPlayer2}\n`)
+                console.log(`Placar: \n${character1.NOME}: ${character1.PONTOS}\n${character2.NOME}: ${character2.PONTOS}\n`)
             } else if (testSkill2 > testSkill1){
-                pointsPlayer2++;
+                character2.PONTOS++;
                 console.log(`Ponto para ${character2.NOME}!\n`)
-                console.log(`Placar: \n${character1.NOME}: ${pointsPlayer1}\n${character2.NOME}: ${pointsPlayer2}\n`)
+                console.log(`Placar: \n${character1.NOME}: ${character1.PONTOS}\n${character2.NOME}: ${character2.PONTOS}\n`)
             } else{
                 console.log("Empate! Ninguém pontua...\n")
-                console.log(`Placar: \n${character1.NOME}: ${pointsPlayer1}\n${character2.NOME}: ${pointsPlayer2}\n`)
+                console.log(`Placar: \n${character1.NOME}: ${character1.PONTOS}\n${character2.NOME}: ${character2.PONTOS}\n`)
             }
         } else if (block === "CURVA"){
             let testSkill1 = character1.MANOBRABILIDADE + diceResult1;
@@ -82,16 +80,16 @@ async function playRaceEngine(character1, character2) {
             console.log(`${character2.MANOBRABILIDADE} + ${diceResult2} = ${testSkill2}\n`)
 
             if (testSkill1 > testSkill2){
-                pointsPlayer1++;
+                character1.PONTOS++;
                 console.log(`Ponto para ${character1.NOME}!\n`)
-                console.log(`Placar: \n${character1.NOME}: ${pointsPlayer1}\n${character2.NOME}: ${pointsPlayer2}\n`)
+                console.log(`Placar: \n${character1.NOME}: ${character1.PONTOS}\n${character2.NOME}: ${character2.PONTOS}\n`)
             } else if (testSkill2 > testSkill1){
-                pointsPlayer2++;
+                character2.PONTOS++;
                 console.log(`Ponto para ${character2.NOME}!\n`)
-                console.log(`Placar: \n${character1.NOME}: ${pointsPlayer1}\n${character2.NOME}: ${pointsPlayer2}\n`)
+                console.log(`Placar: \n${character1.NOME}: ${character1.PONTOS}\n${character2.NOME}: ${character2.PONTOS}\n`)
             } else{
                 console.log("Empate! Ninguém pontua...\n")
-                console.log(`Placar: \n${character1.NOME}: ${pointsPlayer1}\n${character2.NOME}: ${pointsPlayer2}\n`)
+                console.log(`Placar: \n${character1.NOME}: ${character1.PONTOS}\n${character2.NOME}: ${character2.PONTOS}\n`)
             }
         } else if (block === "CONFRONTO"){
             let testSkill1 = character1.PODER + diceResult1;
@@ -102,34 +100,36 @@ async function playRaceEngine(character1, character2) {
             console.log(`${character2.PODER} + ${diceResult2} = ${testSkill2}\n`)
 
             if (testSkill1 > testSkill2){
-                if (pointsPlayer2 > 0){
-                    pointsPlayer2--;
+                if (character2.PONTOS > 0){
+                    character2.PONTOS--;
                 }
                 console.log(`${character1.NOME} vence o confronto!\n`)
-                console.log(`Placar: \n${character1.NOME}: ${pointsPlayer1}\n${character2.NOME}: ${pointsPlayer2}\n`)
+                console.log(`Placar: \n${character1.NOME}: ${character1.PONTOS}\n${character2.NOME}: ${character2.PONTOS}\n`)
             } else if (testSkill2 > testSkill1){
-                if (pointsPlayer1 > 0){
-                    pointsPlayer1--;
+                if (character1.PONTOS > 0){
+                    character1.PONTOS--;
                 }
                 console.log(`${character2.NOME} vence o confronto!\n`)
-                console.log(`Placar: \n${character1.NOME}: ${pointsPlayer1}\n${character2.NOME}: ${pointsPlayer2}\n`)
+                console.log(`Placar: \n${character1.NOME}: ${character1.PONTOS}\n${character2.NOME}: ${character2.PONTOS}\n`)
             } else{
                 console.log("Empate! Ninguém pontua...\n")
-                console.log(`Placar: \n${character1.NOME}: ${pointsPlayer1}\n${character2.NOME}: ${pointsPlayer2}\n`)
+                console.log(`Placar: \n${character1.NOME}: ${character1.PONTOS}\n${character2.NOME}: ${character2.PONTOS}\n`)
             }
         }
+
+        console.log("\n-------------------------------\n")
     }
 
     await delay(1000);
-    if (pointsPlayer1 > pointsPlayer2){
-        console.log(`´\n🎉🥳 Vitória de ${character1.NOME}! 🎉🥳\n`)
-        console.log(`Placar Final: \n${character1.NOME}: ${pointsPlayer1}\n${character2.NOME}: ${pointsPlayer2}\n`)
-    } else if (pointsPlayer2 > pointsPlayer1){
-        console.log(`´\n🎉🥳 Vitória de ${character2.NOME}! 🎉🥳\n`)
-        console.log(`Placar Final: \n${character1.NOME}: ${pointsPlayer1}\n${character2.NOME}: ${pointsPlayer2}\n`)
+    if (character1.PONTOS > character2.PONTOS){
+        console.log(`\n🎉🥳 Vitória de ${character1.NOME}! 🎉🥳\n`)
+        console.log(`Placar Final: \n${character1.NOME}: ${character1.PONTOS}\n${character2.NOME}: ${character2.PONTOS}\n`)
+    } else if (character2.PONTOS > character1.PONTOS){
+        console.log(`\n🎉🥳 Vitória de ${character2.NOME}! 🎉🥳\n`)
+        console.log(`Placar Final: \n${character1.NOME}: ${character1.PONTOS}\n${character2.NOME}: ${character2.PONTOS}\n`)
     } else {
         console.log(`\n🚨⛔ Empate!!! 🚨⛔\n`)
-        console.log(`Placar Final: \n${character1.NOME}: ${pointsPlayer1}\n${character2.NOME}: ${pointsPlayer2}\n`)
+        console.log(`Placar Final: \n${character1.NOME}: ${character1.PONTOS}\n${character2.NOME}: ${character2.PONTOS}\n`)
         console.log(`\nVamos para a corrida de desempate!\n`)
         playRaceEngine(character1, character2)
     }
